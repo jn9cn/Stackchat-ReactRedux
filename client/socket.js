@@ -9,6 +9,10 @@ socket.on('connect', () => {
   socket.on('new-message', message => {
     store.dispatch(getMessage(message));
   });
+    
+  socket.on('new-channel', channel => {
+    store.dispatch(getChannel(channel));
+  });
 
 });
 
