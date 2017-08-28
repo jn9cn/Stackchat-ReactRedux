@@ -4,7 +4,6 @@ import store from '../store';
 import { connect } from 'react-redux';
 
 function ChannelList (props) {
-  const messages = props.messages
   return (
     <ul>
       {
@@ -14,9 +13,7 @@ function ChannelList (props) {
             <NavLink to={`/channels/${channel.id}`} activeClassName="active">
               <span>#{channel.name}</span>
               <span className="badge">
-                {
-                messages.filter(message => message.channelId === channel.id).length
-                }
+                {props.messages.filter(message => message.channelId === channel.id).length}
               </span>
             </NavLink>
           </li>

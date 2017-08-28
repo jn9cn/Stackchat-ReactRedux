@@ -102,16 +102,17 @@ export function postMessage (message) {
 
 }
 
-export function postChannel (channel) {
+export function postChannel (channel, history) {
 
   return function thunk (dispatch) {
     return axios.post('/api/channels', channel)
       .then(res => res.data)
       .then(newChannel => {
-        console.log('FROM SERVER: ', newChannel)
         const action = nameChannel(newChannel);
         dispatch(action);
         socket.emit('new-channel', newChannel);
+        // redirects page to new channel
+        history.push(`/channels/${newChannel.id}`)
       });
   }
 

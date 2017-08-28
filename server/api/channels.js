@@ -28,7 +28,6 @@ router.get('/:channelId/messages', function (req, res, next) {
 
 // POST /api/channels
 router.post('/', function (req, res, next) {
-    console.log('FROM SERVERB ', req.body)
   Channel.create(req.body)
     .then(channel => res.json(channel))
     .catch(next);

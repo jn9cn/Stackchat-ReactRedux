@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {nameChannel, postChannel} from '../store';
 
 export const NewChannelEntry = function(props) {
+  console.log(props.newChannelEntry, "<<<<<")
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="form-group">
@@ -20,13 +21,15 @@ export const NewChannelEntry = function(props) {
         <button type="submit" className="btn btn-default">Create Channel</button>
       </div>
     </form>
-  );
+  )
 }
 
 /** Write your `connect` component below! **/
 
 // receives dispatch as an argument
 const mapDispatchToProps = function (dispatch, ownProps) {
+  // console.log(ownProps, "<<<<<")
+
   return {
     handleChange: (event) => {
         dispatch(nameChannel(event.target.value))
@@ -34,7 +37,9 @@ const mapDispatchToProps = function (dispatch, ownProps) {
     handleSubmit: (event) => {
         event.preventDefault();
         const name = event.target.channelName.value;
-        dispatch(postChannel({name}))
+        dispatch(postChannel({name}, ownProps.history));
+        // supposed to clear the channel name entry bar
+        dispatch(nameChannel(''));
     }
   };
 };
